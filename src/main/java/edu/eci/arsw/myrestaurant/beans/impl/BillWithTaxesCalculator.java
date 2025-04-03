@@ -5,12 +5,10 @@ import edu.eci.arsw.myrestaurant.model.RestaurantProduct;
 import edu.eci.arsw.myrestaurant.beans.BillCalculator;
 import edu.eci.arsw.myrestaurant.beans.TaxesCalculator;
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+@Service
 public class BillWithTaxesCalculator implements BillCalculator {
-
 
     TaxesCalculator taxescalc;
 
@@ -27,3 +25,4 @@ public class BillWithTaxesCalculator implements BillCalculator {
     }
 
 }
+

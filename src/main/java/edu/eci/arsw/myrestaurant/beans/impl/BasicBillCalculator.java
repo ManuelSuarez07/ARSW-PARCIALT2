@@ -6,9 +6,8 @@ import edu.eci.arsw.myrestaurant.beans.BillCalculator;
 import java.util.Map;
 import org.springframework.stereotype.Service;
 
-
+@Service
 public class BasicBillCalculator implements BillCalculator {
-
 	@Override
 	public int calculateBill(Order o,Map<String,RestaurantProduct> productsMap) {
 		int total=0;
@@ -18,5 +17,4 @@ public class BasicBillCalculator implements BillCalculator {
 		}
 		return total;
 	}
-
 }

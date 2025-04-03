@@ -1,18 +1,18 @@
 package edu.eci.arsw.myrestaurant.services;
 
-
 import edu.eci.arsw.myrestaurant.model.Order;
 import edu.eci.arsw.myrestaurant.model.RestaurantProduct;
 import edu.eci.arsw.myrestaurant.beans.BillCalculator;
 import edu.eci.arsw.myrestaurant.model.ProductType;
+import org.springframework.stereotype.Service;
+
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-
+@Service
 public class RestaurantOrderServicesStub implements RestaurantOrderServices {
 
-    
     BillCalculator calc = null;
 
     public RestaurantOrderServicesStub() {
@@ -58,7 +58,6 @@ public class RestaurantOrderServicesStub implements RestaurantOrderServices {
         } else {
             tableOrders.put(o.getTableNumber(), o);
         }
-
     }
 
     @Override
@@ -68,7 +67,6 @@ public class RestaurantOrderServicesStub implements RestaurantOrderServices {
         } else {
             tableOrders.remove(tableNumber);
         }
-
     }
 
     @Override
@@ -80,14 +78,22 @@ public class RestaurantOrderServicesStub implements RestaurantOrderServices {
         }
     }
 
+    @Override
+    public Map<Integer, Order> getTableOrders() {
+        return tableOrders;
+    }
+
+    public Map<String, RestaurantProduct> getProductsMap() {
+        return productsMap;
+    }
+
     private static final Map<String, RestaurantProduct> productsMap;
 
     private static final Map<Integer, Order> tableOrders;
-    
 
     static {
         productsMap = new ConcurrentHashMap<>();
-        tableOrders = new ConcurrentHashMap<>();        
+        tableOrders = new ConcurrentHashMap<>();
         productsMap.put("PIZZA", new RestaurantProduct("PIZZA", 10000, ProductType.DISH));
         productsMap.put("HOTDOG", new RestaurantProduct("HOTDOG", 3000, ProductType.DISH));
         productsMap.put("COKE", new RestaurantProduct("COKE", 1300, ProductType.DRINK));
@@ -98,14 +104,13 @@ public class RestaurantOrderServicesStub implements RestaurantOrderServices {
         o.addDish("PIZZA", 3);
         o.addDish("HOTDOG", 1);
         o.addDish("COKE", 4);
-
+        // 3 PIZZA = 30000 + 1 PERRO = 3000 + 4 GASEOSAS = 5200 TOTAL = 38200
         tableOrders.put(1, o);
 
         Order o2 = new Order(3);
         o2.addDish("HAMBURGER", 2);
         o2.addDish("COKE", 2);
-
+        // 2 HAMBUR = 24600 + 2 GASEOSAS = 2600 TOTAL = 27200
         tableOrders.put(3, o2);
     }
-
 }
